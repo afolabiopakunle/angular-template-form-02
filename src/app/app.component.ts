@@ -1,7 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { map, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, } from 'rxjs/operators';
 
 @Component({
   selector: 'my-app',
