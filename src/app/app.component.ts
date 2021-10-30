@@ -1,5 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'my-app',
@@ -26,7 +28,15 @@ export class AppComponent implements OnInit  {
   }
 
   fetchData() {
-    this.http.get('https://todo-firebase-angular-default-rtdb.firebaseio.com/posts.json').pipe()
+    this.http.get('https://todo-firebase-angular-default-rtdb.firebaseio.com/posts.json').pipe(map(responseData => {
+    const postArray = [];
+    for(const key in responseData) {
+      postArray.push({...responseData[key], id: key})
+    }
+    postArray.push({blogTitle: 'Defly', blogPost: 'I pushed this in on the fly men!', id: 'DealWithIt' })
+    return postArray
+  })
+    )
     .subscribe(posts => {
       console.log(posts)
     })
