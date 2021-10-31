@@ -1,16 +1,24 @@
 import { Component, OnInit, } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { map, } from 'rxjs/operators';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  styleUrls: [ './app.component.css' ],
+  animations: [
+    trigger('fade',[
+      transition('void => *', style({opacity: 0})),
+      animate(2000)
+    ])
+  ]
 })
 export class AppComponent implements OnInit  {
  
   blogTitle = '';
 
+  show: boolean = false;
   blogPost = '';
 
   constructor(private http: HttpClient) {}
